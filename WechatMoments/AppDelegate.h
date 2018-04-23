@@ -7,11 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+@class LMYTabBarController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic, strong) LMYTabBarController * mainTabBarController;
 
++ (AppDelegate *)appDelegate;
+
++ (UIViewController *)getRootController;
+
+//显示登录界面
+- (void)showLoginViewController;
+
+//设置根视图
+- (void)setRootVcOfLMYNavitaionVc;
 @end
 
