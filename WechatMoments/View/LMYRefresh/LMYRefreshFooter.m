@@ -108,7 +108,7 @@
     {
         [self.tipLabel setHidden:NO];
         [self.loadingView setHidden:YES];
-        [self.tipLabel setText:@"___ 我是有底线的 ___"];
+        [self.tipLabel setText:@"___ END ___"];
     }
     else{
         [self.tipLabel setHidden:YES];

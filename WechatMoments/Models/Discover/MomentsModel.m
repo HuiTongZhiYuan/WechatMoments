@@ -40,7 +40,10 @@
             NSDictionary * dic = FLDictionary([array objectAtIndex:i], nil);
             if (dic) {
                 NSDictionary * sender =FLDictionary([dic objectForKey:@"sender"], nil);
-                if (sender) { //有人存在，代表正常帖子
+                
+                NSString * content = FLString([dic objectForKey:@"content"], @"");
+                NSArray * images = FLArray([dic objectForKey:@"images"], nil);
+                if (sender && (content.length > 0 || images.count > 0)) { //有人存在，并且有内容，代表正常帖子
                     
                     MomentsModel * tModel = [[MomentsModel alloc] init];
                     
@@ -48,9 +51,9 @@
                     tModel.sender_nick = FLString([sender objectForKey:@"nick"],@"");
                     tModel.sender_username = FLString([sender objectForKey:@"username"], @"");
                     
-                    tModel.content = FLString([dic objectForKey:@"content"], @"");
+                    tModel.content = content;
                     
-                    tModel.images = FLArray([dic objectForKey:@"images"], nil);
+                    tModel.images = images;
                     
                     NSArray * comments = FLArray([dic objectForKey:@"comments"], nil);
                     if (comments) {
