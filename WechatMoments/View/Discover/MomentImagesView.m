@@ -44,11 +44,6 @@ static NSString *const cellId = @"FLPictureViewerCellId";
     _collectionView.scrollEnabled = NO;
     [self addSubview:_collectionView];
 
-    [_collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.top.mas_equalTo(0);
-        make.height.mas_equalTo(self.mas_height);
-    }];
     // 注册cell
     [self.collectionView registerClass:[MomentImagesCollectionCell class] forCellWithReuseIdentifier:cellId];
 
@@ -61,12 +56,18 @@ static NSString *const cellId = @"FLPictureViewerCellId";
 
     if (self.imageNSArray.count == 1) {
 
-        [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(0);
             make.width.mas_equalTo(ONE_IMAGES_WIDTH*2+4);
+            make.height.mas_equalTo(self.mas_height);
         }];
     }else{
-        [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(self.mas_width);
+        [_collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(0);
+            make.width.mas_equalTo(ONE_IMAGES_WIDTH*2+4);
+            make.height.mas_equalTo(self.mas_height);
         }];
     }
 
@@ -135,22 +136,23 @@ static NSString *const cellId = @"FLPictureViewerCellId";
 #pragma mark - MomentImagesCollectionCellDelegate <NSObject>
 - (void)imageButtonClick:(NSInteger)index
 {
-    FLPictureViewerController * next = [[FLPictureViewerController alloc] init];
-
-    for (int i = 0; i<self.imageNSArray.count; i++)
-    {
-        NSString * url = FLString([[self.imageNSArray objectAtIndex:0] objectForKey:@"url"], @"");
-        
-        FLPictureViewerModel * picModel = [[FLPictureViewerModel alloc] initWiththumbnail:url original:url];
-        [next arrayAddMode:picModel];
-    }
-
-    [next showAllPicWithIndex:index];
-    next.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    next.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    next.delegate = self;
-    UIViewController * ctl = [AppDelegate getRootController];
-    [ctl presentPopupViewController:next animationType:MJPopupViewAnimationFade hideStatusBar:YES];
+    //图片预览没有支持横屏，暂时注释掉
+//    FLPictureViewerController * next = [[FLPictureViewerController alloc] init];
+//
+//    for (int i = 0; i<self.imageNSArray.count; i++)
+//    {
+//        NSString * url = FLString([[self.imageNSArray objectAtIndex:0] objectForKey:@"url"], @"");
+//
+//        FLPictureViewerModel * picModel = [[FLPictureViewerModel alloc] initWiththumbnail:url original:url];
+//        [next arrayAddMode:picModel];
+//    }
+//
+//    [next showAllPicWithIndex:index];
+//    next.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    next.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    next.delegate = self;
+//    UIViewController * ctl = [AppDelegate getRootController];
+//    [ctl presentPopupViewController:next animationType:MJPopupViewAnimationFade hideStatusBar:YES];
 }
 
 

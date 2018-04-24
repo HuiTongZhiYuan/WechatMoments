@@ -284,10 +284,14 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
     [_momentsTableView setDelegate:self];
     [_momentsTableView setDataSource:self];
     [self.view addSubview:_momentsTableView];
+
+    _momentsTableView.estimatedRowHeight = 0;
     
     _momentsTableView.backgroundColor = [UIColor clearColor];
-    
 
+    _headView = [[MomentsHeadView alloc] init];
+    [self.view addSubview:_headView];
+    _momentsTableView.tableHeaderView = _headView;
 }
 
 
@@ -308,6 +312,7 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
         make.width.mas_equalTo(self.view.mas_width);
         make.height.mas_equalTo(self.view.mas_width).mas_offset(-kHeadHeight-LMY_NavHeight+50);
     }];
+    [_momentsTableView layoutIfNeeded];
     
     //使用Auto Layout约束，禁止将Autoresizing Mask转换为约束
     [_momentsTableView setTranslatesAutoresizingMaskIntoConstraints:NO];

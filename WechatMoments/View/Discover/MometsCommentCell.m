@@ -86,31 +86,22 @@
     
     self.contentLabel.attributedText = attributedStr;
     [self.contentLabel sizeToFit];
-
-
-
-
-//    [self.backButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(10);
-//        make.top.mas_equalTo(4);
-//        make.width.mas_equalTo(self.backView.mas_width);
-//        make.height.mas_equalTo(self.backView.mas_height);
-//    }];
 }
 
 - (void)layoutSubviews{
 
     [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_left).mas_offset(75);
-        make.top.mas_equalTo(self.mas_top).mas_offset(4);
         make.right.mas_equalTo(self.mas_right).mas_offset(-30);
+        make.top.mas_equalTo(self.mas_top).mas_offset(4);
+        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-4);
     }];
 
     [self.backView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(65);
         make.top.mas_equalTo(0);
         make.right.mas_equalTo(self.mas_right).mas_offset(-20);
-        make.height.mas_equalTo(self.contentLabel.mas_height).mas_offset(8);
+        make.bottom.mas_equalTo(self.mas_bottom);
     }];
 }
 
