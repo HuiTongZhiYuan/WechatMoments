@@ -138,12 +138,12 @@
     self.mainTabBarController = tabCtl;
     
 
-    LMYNavigationController * navAll = [[LMYNavigationController alloc] initWithRootViewController:self.mainTabBarController];
-    self.window.rootViewController = navAll;
+//    LMYNavigationController * navAll = [[LMYNavigationController alloc] initWithRootViewController:self.mainTabBarController];
+//    self.window.rootViewController = navAll;
     
-    //    MomentsViewController * mCtl = [[MomentsViewController alloc] init];
-    //     self.window.rootViewController = mCtl;
-    
+        MomentsViewController * mCtl = [[MomentsViewController alloc] init];
+         self.window.rootViewController = mCtl;
+
     [self.window makeKeyAndVisible];
     
     

@@ -14,6 +14,8 @@
 
 @interface MomentsPostView()
 
+@property(nonatomic,strong)MomentsModel * cellModel;
+
 @property(nonatomic,strong) UIImageView * avatarImageView;//头像
 @property(nonatomic,strong) UILabel * nameLabel;//用户名
 @property(nonatomic,strong) UILabel * contentLabel;//内容
@@ -33,22 +35,65 @@
 -(instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
-        
-        
-      
+
+        [self addSubview:self.avatarImageView];
+        [self addSubview:self.nameLabel];
+        [self addSubview:self.contentLabel];
+        [self addSubview:self.imagesView];
+        [self addSubview:self.addressLabel];
+        [self addSubview:self.timeLabel];
+        [self addSubview:self.arrowView];
+        [self addSubview:self.controlButton];
+
+        [self.avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.mas_left).mas_offset(20);
+            make.top.mas_equalTo(self.mas_top).mas_offset(16);
+            make.width.mas_equalTo(40);
+            make.height.mas_equalTo(40);
+        }];
+        [self.nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.avatarImageView.mas_right).mas_offset(12);
+            make.top.mas_equalTo(self.avatarImageView.mas_top);
+            make.right.mas_equalTo(self.mas_right).mas_offset(-12);
+            make.height.mas_equalTo(40);
+        }];
+
+        [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.nameLabel.mas_left);
+            make.top.mas_equalTo(self.nameLabel.mas_bottom).mas_offset(AllInterval);
+            make.right.mas_equalTo(self.mas_right).mas_offset(-12);
+        }];
+
+        [self.imagesView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.nameLabel.mas_left);
+            make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(AllInterval);
+            make.right.mas_equalTo(self.mas_right).mas_offset(-12);
+        }];
+
+
+        [self.arrowView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.nameLabel.mas_left).mas_offset(8);
+            make.bottom.mas_equalTo(self.mas_bottom);
+            make.width.mas_equalTo(11);
+            make.height.mas_equalTo(5);
+        }];
+        [self.controlButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(self.mas_right).mas_offset(-20);
+            make.bottom.mas_equalTo(self.mas_bottom);
+            make.width.mas_equalTo(25);
+            make.height.mas_equalTo(25);
+        }];
     }
     return self;
 }
-
-
 
 #pragma mark - 懒加载
 //头像
 - (UIImageView *)avatarImageView
 {
     if (!_avatarImageView) {
-        UIImageView * avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 16, 40, 40)];
-        [self addSubview:_avatarImageView = avatarImageView];
+        UIImageView * avatarImageView = [[UIImageView alloc] init];
+        _avatarImageView = avatarImageView;
     }
     return _avatarImageView;
 }
@@ -57,11 +102,11 @@
 - (UILabel *)nameLabel
 {
     if (!_nameLabel) {
-        UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.avatarImageView.l_right+12, self.avatarImageView.l_top, NAME_CONTENT_WIDTH, 40)];
+        UILabel * nameLabel = [[UILabel alloc] init];
         nameLabel.font = [UIFont boldSystemFontOfSize:18];
         nameLabel.textColor = HEX(0xbcc0cd);
         [nameLabel setBackgroundColor:[UIColor clearColor]];
-        [self addSubview:_nameLabel = nameLabel];
+        _nameLabel = nameLabel;
     }
     return _nameLabel;
 }
@@ -70,12 +115,12 @@
 - (UILabel *)contentLabel
 {
     if (!_contentLabel) {
-        UILabel * contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.nameLabel.l_left, 0, NAME_CONTENT_WIDTH, 40)];
+        UILabel * contentLabel = [[UILabel alloc] init];
         contentLabel.font = [UIFont systemFontOfSize:16];
         contentLabel.numberOfLines = 0;
         contentLabel.textColor = RGB_51;
         [contentLabel setBackgroundColor:[UIColor clearColor]];
-        [self addSubview:_contentLabel = contentLabel];
+        _contentLabel = contentLabel;
     }
     return _contentLabel;
 }
@@ -85,32 +130,20 @@
 {
     if (!_imagesView) {
         MomentImagesView * imagesView = [[MomentImagesView alloc] init];
-        [self addSubview:_imagesView = imagesView];
+        _imagesView = imagesView;
     }
     return _imagesView;
 }
-
-//评论箭头
-- (UIImageView *)arrowView
-{
-    if (!_arrowView) {
-        UIImageView * arrowView = [[UIImageView alloc] initWithFrame:CGRectMake(self.nameLabel.l_left+8, 16, 11, 5)];
-        [arrowView setImage:[LMYResource imageNamed:@"ComRectangle"]];
-        [self addSubview:_arrowView = arrowView];
-    }
-    return _arrowView;
-}
-
 
 //地址
 - (UILabel *)addressLabel
 {
     if (!_addressLabel) {
-        UILabel * addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.nameLabel.l_left, 0, NAME_CONTENT_WIDTH, 40)];
+        UILabel * addressLabel = [[UILabel alloc] init];
         addressLabel.font = [UIFont systemFontOfSize:12];
         addressLabel.textColor = HEX(0xbcc0cd);
         [addressLabel setBackgroundColor:[UIColor clearColor]];
-        [self addSubview:_addressLabel = addressLabel];
+        _addressLabel = addressLabel;
     }
     return _addressLabel;
 }
@@ -119,30 +152,43 @@
 - (UILabel *)timeLabel
 {
     if (!_timeLabel) {
-        UILabel * timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.nameLabel.l_left, 0, NAME_CONTENT_WIDTH, 40)];
+        UILabel * timeLabel = [[UILabel alloc] init];
         timeLabel.font = [UIFont systemFontOfSize:12];
         timeLabel.textColor = RGB_215;
         [timeLabel setBackgroundColor:[UIColor clearColor]];
-        [self addSubview:_timeLabel = timeLabel];
+        _timeLabel = timeLabel;
     }
     return _timeLabel;
+}
+
+//评论箭头
+- (UIImageView *)arrowView
+{
+    if (!_arrowView) {
+        UIImageView * arrowView = [[UIImageView alloc] init];
+        [arrowView setImage:[LMYResource imageNamed:@"ComRectangle"]];
+        _arrowView = arrowView;
+    }
+    return _arrowView;
 }
 
 //评论按钮
 - (UIButton *)controlButton
 {
     if (!_controlButton) {
-        UIButton * controlButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-25-20, 0, 25, 25)];
+        UIButton * controlButton = [[UIButton alloc] init];
         [controlButton setImage:[LMYResource imageNamed:@"AlbumOperateMore"] forState:UIControlStateNormal];
         [controlButton setImage:[LMYResource imageNamed:@"AlbumOperateMoreHL"] forState:UIControlStateHighlighted];
         [controlButton addTarget:self action:@selector(controlButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_controlButton = controlButton];
+        _controlButton = controlButton;
     }
     return _controlButton;
 }
 
+#pragma mark - 显示内容
 - (void)showMomentsPostView:(MomentsModel *)model
 {
+    self.cellModel = model;
     [self allViewHide];
 //    model.address = @"1123456789";
 //    model.timeStamp = 1523596257;
@@ -150,70 +196,80 @@
     [self.avatarImageView setHidden:NO];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:model.sender_avatar] placeholderImage:[LMYResource imageNamed:@"DefaultHead"]];
 
-
     //名字
     [self.nameLabel setHidden:NO];
     self.nameLabel.text = model.sender_nick;
     [self.nameLabel sizeToFit];
-    
-    CGFloat topY = self.nameLabel.l_bottom;
+
     //2 内容
     if (model.content.length > 0) {
-        self.contentLabel.l_width = NAME_CONTENT_WIDTH;
         [self.contentLabel setHidden:NO];
         self.contentLabel.text = model.content;
         [self.contentLabel sizeToFit];
-        self.contentLabel.l_top = topY+AllInterval;
-        
-        topY = self.contentLabel.l_bottom;
     }
 
     //3 图片
     if (model.images.count > 0) {
+
         [self.imagesView setHidden:NO];
-        
-        CGFloat one = (NAME_IMAGES_WIDTH - 8)/3;
-        CGFloat contentH = one*2+4;
-        if (model.images.count > 1 && model.images.count <=3)
-        {
-            contentH = one;
-        }else if (model.images.count > 3 && model.images.count <=6){
-            contentH = one*2+4;
-        }else if (model.images.count > 6){
-            contentH = one*3+8;
+        CGFloat topY = self.nameLabel.l_bottom;
+        if (self.cellModel.content.length > 0) {
+            topY = self.contentLabel.l_bottom;
         }
-        self.imagesView.frame = CGRectMake(self.nameLabel.l_left, topY+AllInterval, one*3+8, contentH);
+        CGFloat contentH = 10; //图片区域高度
+        CGFloat one = (NAME_IMAGES_WIDTH - 8)/3;
+
+        CGFloat contentW = one*3+8;//图片区域宽度
+        if (self.cellModel.images.count == 4)
+        {
+            contentW = one*2+4;//图片区域宽度
+        }
+        if (self.cellModel.images.count > 0) {
+            if (self.cellModel.images.count > 1 && self.cellModel.images.count <=3)
+            {
+                contentH = one;
+            }else if (self.cellModel.images.count > 3 && self.cellModel.images.count <=6){
+                contentH = one*2+4;
+            }else if (self.cellModel.images.count > 6){
+                contentH = one*3+8;
+            }else{
+                contentH = one*2+4;
+            }
+        }
+        [self.imagesView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.nameLabel.mas_left);
+
+            if (self.cellModel.content.length > 0) {
+                make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(AllInterval);
+            }else{
+                make.top.mas_equalTo(self.nameLabel.mas_bottom).mas_offset(AllInterval);
+            }
+            make.width.mas_equalTo(contentW);
+            make.height.mas_equalTo(contentH);
+        }];
         [self.imagesView showMomentImagesView:model.images];
-        topY = self.imagesView.l_bottom;
+    }else{
+        [self.imagesView setHidden:YES];
     }
-    
+
     //4 地址
     if (model.address.length > 0) {
         self.addressLabel.text = model.address;
         [self.addressLabel sizeToFit];
-        
-        self.addressLabel.l_top = topY+AllInterval;
-        
-        topY = self.addressLabel.l_bottom;
     }
-    
-    //6 控制器
-    [self.controlButton setHidden:NO];
-    self.controlButton.l_top = topY+AllInterval-5;
-    
-    //5 时间  和 更多按钮
+
+    //5 时间
     if (model.timeStamp > 0) {
         self.timeLabel.text = [LMYDateUtility timestampFormatWithTime:model.timeStamp andFormatter:@"yyyy-MM-dd HH:mm"];
         [self.timeLabel sizeToFit];
-        self.timeLabel.l_top = topY+AllInterval;
     }
-    topY = self.controlButton.l_bottom;
-    
+
     //6 底部
     if (model.comments.count > 0) {
         [self.arrowView setHidden:NO];
-        self.arrowView.frame = CGRectMake(self.nameLabel.l_left+10, topY, 11, 5);
     }
+
+    [self.controlButton setHidden:NO];
 }
 
 - (void)allViewHide
@@ -270,9 +326,7 @@
         he+=AllInterval;
     }
     
-    
     //5 时间 6 更多器
-    he=(he - 5);
     he+=25;
     
     //6 底部

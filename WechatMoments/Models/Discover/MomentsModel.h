@@ -24,7 +24,8 @@
 @property(nonatomic,strong)NSMutableArray * comments;
 
 
-@property(nonatomic,assign)CGFloat height;
+@property(nonatomic,assign)CGFloat landscapeHeight;//横屏下cell高度
+@property(nonatomic,assign)CGFloat portraitHeight;//竖屏下cell高度
 
 //格式化数据
 + (void)formatArray:(NSArray *)array addArray:(NSMutableArray *)mArray;

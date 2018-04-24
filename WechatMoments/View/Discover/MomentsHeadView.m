@@ -32,7 +32,7 @@
     [heardImageView setBackgroundColor:[UIColor clearColor]];
     [heardImageView sd_setImageWithURL:[NSURL URLWithString:[LMYUserLoginModel shareInstance].profile] placeholderImage:[LMYResource imageNamed:@"testBack"]];
     [self addSubview:heardImageView];
-    [heardImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [heardImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_left);
         make.top.mas_equalTo(self.mas_top).mas_offset(-kHeadHeight-60);
         make.right.mas_equalTo(self.mas_right);
@@ -46,7 +46,7 @@
     backView.layer.borderColor = Color_Line_Background.CGColor;
     backView.layer.borderWidth = 1;
     [self addSubview:backView];
-    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [backView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.mas_bottom).mas_offset(-98);
         make.right.mas_equalTo(self.mas_right).mas_offset(-10);
         make.width.mas_equalTo(68);
@@ -56,7 +56,7 @@
     
     personImageView = [[UIImageView alloc] init];
     [backView addSubview:personImageView];
-    [personImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [personImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(backView.mas_left).mas_offset(-2);
         make.right.mas_equalTo(backView.mas_right).mas_offset(-2);
         make.top.mas_equalTo(backView.mas_top).mas_offset(-2);
@@ -74,7 +74,7 @@
     [personNameLabel setBackgroundColor:[UIColor clearColor]];
     personNameLabel.text = [LMYUserLoginModel shareInstance].nick;
     
-    [personNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [personNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(backView.mas_left).mas_offset(-20);
         make.top.mas_equalTo(self->heardImageView.mas_bottom).mas_offset(-40);

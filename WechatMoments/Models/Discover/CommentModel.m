@@ -15,7 +15,10 @@
     self = [super init];
     if (self) {
         self.content = @"";
-        
+
+        self.landscapeHeight = 0;
+        self.portraitHeight = 0;
+
         self.sender_avatar = @"";
         self.sender_nick = @"";
         self.sender_username = @"";
@@ -39,7 +42,7 @@
                 comModel.sender_username = FLString([sender objectForKey:@"username"], @"");
                 
                 comModel.content = FLString([dic objectForKey:@"content"], @"");
-                comModel.height = [comModel modelHeight];
+                
                 [mArray addObject:comModel];
             }
         }
@@ -53,6 +56,13 @@
     NSMutableAttributedString * attributedStr = [[NSMutableAttributedString alloc] initWithString: text];
     attributedStr.yy_color = RGB_51;
     attributedStr.yy_font = [UIFont systemFontOfSize:14];
+
+    NSRange range = [text rangeOfString:[NSString stringWithFormat:@"%@：",self.sender_nick]];
+
+    [attributedStr yy_setTextHighlightRange:range color:Color_CommonBlue backgroundColor:RGB_Line_Color tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+
+
+    }];
     
     YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:CGSizeMake(SCREEN_WIDTH-65-20-20, CGFLOAT_MAX) text:attributedStr];
     

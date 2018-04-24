@@ -118,7 +118,7 @@
             headImageView = [[UIImageView alloc] init];
             [headImageView setTag:11];
             [cell addSubview:headImageView];
-            [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            [headImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(cell.mas_left).mas_offset(10);
                 make.top.mas_equalTo(cell.mas_top).mas_offset(10);
                 make.width.mas_equalTo(66);
@@ -131,7 +131,7 @@
             qrcodeImageView = [[UIImageView alloc] init];
             [qrcodeImageView setTag:12];
             [cell addSubview:qrcodeImageView];
-            [qrcodeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            [qrcodeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.right.mas_equalTo(cell.mas_right).mas_offset(-40);
                 make.top.mas_equalTo(cell.mas_top).mas_offset(28);
                 make.width.mas_equalTo(30);
@@ -144,7 +144,7 @@
             [nameLabel setFont:[UIFont boldSystemFontOfSize:16]];
             [nameLabel setTag:13];
             [cell addSubview:nameLabel];
-            [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            [nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(headImageView.mas_right).mas_offset(10);
                 make.top.mas_equalTo(cell.mas_top).mas_offset(20);
                 make.right.mas_equalTo(qrcodeImageView.mas_left).mas_offset(-10);
@@ -156,7 +156,7 @@
             [codeLabel setFont:[UIFont systemFontOfSize:14]];
             [codeLabel setTag:14];
             [cell addSubview:codeLabel];
-            [codeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            [codeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(headImageView.mas_right).mas_offset(10);
                 make.top.mas_equalTo(nameLabel.mas_bottom).mas_offset(10);
                 make.right.mas_equalTo(qrcodeImageView.mas_left).mas_offset(-10);

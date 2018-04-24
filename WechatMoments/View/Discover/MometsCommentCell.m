@@ -27,40 +27,6 @@
     // Initialization code
 }
 
-#pragma mark - 懒加载
-- (UIView *)backView
-{
-    if (!_backView) {
-        UIView * backView = [[UIView alloc] initWithFrame:CGRectMake(65, 0, SCREEN_WIDTH-65-20, self.l_height)];
-        [backView setBackgroundColor:Color_BackgroundGray];
-        [self addSubview:_backView = backView];
-    }
-    return _backView;
-}
-
-- (UIButton *)backButton
-{
-    if (!_backButton) {
-        UIButton * backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.backView.l_width, self.backView.l_height)];
-        [backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
-        [backButton setBackgroundImage:[LMYResource imageNamed:@"ButtonMarkClick"] forState:UIControlStateHighlighted];
-        [backButton setBackgroundColor:[UIColor clearColor]];
-        backButton.alpha = 0.2;
-        [self.backView addSubview:_backButton = backButton];
-    }
-    return _backButton;
-}
-
-- (YYLabel *)contentLabel
-{
-    if (!_contentLabel) {
-        YYLabel * contentLabel = [[YYLabel alloc] initWithFrame:CGRectMake(10, 4, self.backView.l_width-20, 40)];
-        [contentLabel setBackgroundColor:[UIColor clearColor]];
-        contentLabel.numberOfLines = 0;
-        [self.backView addSubview:_contentLabel = contentLabel];
-    }
-    return _contentLabel;
-}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -69,6 +35,29 @@
         self.contentView.backgroundColor = [UIColor whiteColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.accessoryType = UITableViewCellAccessoryNone;
+
+
+        _backView = [[UIView alloc] init];
+        [_backView setBackgroundColor:Color_BackgroundGray];
+        [self addSubview:_backView];
+
+        _contentLabel = [[YYLabel alloc] init];
+        _contentLabel.numberOfLines = 0;
+        [self addSubview:_contentLabel];
+
+
+        _backButton = [[UIButton alloc] init];
+        [_backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setBackgroundImage:[LMYResource imageNamed:@"ButtonMarkClick"] forState:UIControlStateHighlighted];
+        [_backButton setBackgroundColor:[UIColor clearColor]];
+        _backButton.alpha = 0.2;
+        [self addSubview:_backButton];
+        [_backButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.backView.mas_left);
+            make.top.mas_equalTo(self.backView.mas_top);
+            make.width.mas_equalTo(self.backView.mas_width);
+            make.height.mas_equalTo(self.backView.mas_height);
+        }];
     }
     return self;
 }
@@ -77,8 +66,7 @@
 - (void)showMometsCommentCell:(CommentModel *)model
 {
     NSLog(@"1111");
-    
-    self.contentLabel.l_width = self.backView.l_width-20;
+
     NSString * text = [NSString stringWithFormat:@"%@：%@",model.sender_nick,model.content];
     
     NSMutableAttributedString * attributedStr = [[NSMutableAttributedString alloc] initWithString: text];
@@ -98,8 +86,32 @@
     
     self.contentLabel.attributedText = attributedStr;
     [self.contentLabel sizeToFit];
-    self.backView.l_height = self.contentLabel.l_height+8;
-    self.backButton.l_height = self.backView.l_height;
+
+
+
+
+//    [self.backButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(10);
+//        make.top.mas_equalTo(4);
+//        make.width.mas_equalTo(self.backView.mas_width);
+//        make.height.mas_equalTo(self.backView.mas_height);
+//    }];
+}
+
+- (void)layoutSubviews{
+
+    [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.mas_left).mas_offset(75);
+        make.top.mas_equalTo(self.mas_top).mas_offset(4);
+        make.right.mas_equalTo(self.mas_right).mas_offset(-30);
+    }];
+
+    [self.backView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(65);
+        make.top.mas_equalTo(0);
+        make.right.mas_equalTo(self.mas_right).mas_offset(-20);
+        make.height.mas_equalTo(self.contentLabel.mas_height).mas_offset(8);
+    }];
 }
 
 

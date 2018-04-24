@@ -259,9 +259,9 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
     [self creatLMYRefreshFooter];
     self.momentsTableView.tableFooterView = self.footer;
     
-    _momentsTableView.estimatedRowHeight = 0;
-    _momentsTableView.estimatedSectionHeaderHeight = 0;
-    _momentsTableView.estimatedSectionFooterHeight = 0;
+//    _momentsTableView.estimatedRowHeight = 0;
+//    _momentsTableView.estimatedSectionHeaderHeight = 0;
+//    _momentsTableView.estimatedSectionFooterHeight = 0;
 }
 
 - (void)addLoadingView
@@ -287,10 +287,7 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
     
     _momentsTableView.backgroundColor = [UIColor clearColor];
     
-    _headView = [[MomentsHeadView alloc] init];
-    [self.view addSubview:_headView];
-    
-    _momentsTableView.tableHeaderView = _headView;
+
 }
 
 
@@ -299,14 +296,14 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
     [super viewDidLayoutSubviews];
     
 
-    [_topBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_topBackView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_left);
         make.top.mas_equalTo(self.view.mas_top).mas_offset(-kHeadHeight);
         make.right.mas_equalTo(self.view.mas_right);
         make.height.mas_equalTo(self.view.mas_width);
     }];
     
-    [_headView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_headView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
         make.top.mas_equalTo(0);
         make.width.mas_equalTo(self.view.mas_width);
@@ -322,8 +319,6 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
     
     NSArray *array = [NSArray arrayWithObjects:contraint1, contraint2, contraint3, contraint4, nil];
     [self.view addConstraints:array];
-    
-    [self.momentsTableView reloadData];
 }
 
 #pragma mark - 滚动代理
@@ -474,7 +469,7 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     MomentsModel * model = [self.mArray objectAtIndex:section];
-    return model.height;
+    return  [MomentsPostView heightWithModel:model];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -493,13 +488,11 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
         MomentsModel * model = [self.mArray objectAtIndex:section];
         [momentsView showMomentsPostView:model];
     }
-    NSLog(@"-=-=-=-=-=-=-=-= <%@>",momentsView);
     return momentsView;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     MomentsFooterView * footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:FooterViewIdentifier];
-    
     return footerView;
 }
 
@@ -507,10 +500,9 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
 {
     if (indexPath.section < self.mArray.count) {
         MomentsModel * mModel = [self.mArray objectAtIndex:indexPath.section];
-        
         if (indexPath.row < mModel.comments.count) {
             CommentModel * cModel = [mModel.comments objectAtIndex:indexPath.row];
-            return cModel.height;
+            return  [cModel modelHeight];
         }
     }
     return 0;
@@ -557,7 +549,7 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
         [markButton setBackgroundColor:[UIColor clearColor]];
         [self.view addSubview:_markButton = markButton];
         
-        [markButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [markButton mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.view.mas_left);
             make.top.mas_equalTo(self.view.mas_top);
             make.right.mas_equalTo(self.view.mas_right);

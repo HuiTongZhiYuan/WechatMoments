@@ -17,9 +17,14 @@
 @property(nonatomic,copy)NSString * sender_nick;
 @property(nonatomic,copy)NSString * sender_username;
 
-@property(nonatomic,assign)CGFloat height;
+
+@property(nonatomic,assign)CGFloat landscapeHeight;//横屏下cell高度
+@property(nonatomic,assign)CGFloat portraitHeight;//竖屏下cell高度
 
 //格式化数据
 + (void)formatArray:(NSArray *)array addArray:(NSMutableArray *)mArray;
+
+//计算高度
+- (CGFloat)modelHeight;
 
 @end

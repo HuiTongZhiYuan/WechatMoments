@@ -725,13 +725,6 @@
 			path = Discover;
 			sourceTree = "<group>";
 		};
-		3EAC4FBA208E1D9400600FAE /* Custom */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Custom;
-			sourceTree = "<group>";
-		};
 		3EAC4FBB208E1DFF00600FAE /* PHAssets */ = {
 			isa = PBXGroup;
 			children = (
@@ -832,16 +825,16 @@
 			children = (
 				3EAC4FFE208E1E6E00600FAE /* MomentsPostView.h */,
 				3EAC4FF8208E1E6E00600FAE /* MomentsPostView.m */,
+				3EAC5003208E1E6E00600FAE /* MomentImagesView.h */,
+				3EAC4FFD208E1E6E00600FAE /* MomentImagesView.m */,
 				3EAC5000208E1E6E00600FAE /* MometsCommentCell.h */,
 				3EAC4FF9208E1E6E00600FAE /* MometsCommentCell.m */,
-				3EAC4FFA208E1E6E00600FAE /* FabulousCommentView.h */,
-				3EAC4FFF208E1E6E00600FAE /* FabulousCommentView.m */,
 				3EAC4FFB208E1E6E00600FAE /* MomentsHeadView.h */,
 				3EAC5002208E1E6E00600FAE /* MomentsHeadView.m */,
 				3EAC5001208E1E6E00600FAE /* MomentsFooterView.h */,
 				3EAC4FFC208E1E6E00600FAE /* MomentsFooterView.m */,
-				3EAC5003208E1E6E00600FAE /* MomentImagesView.h */,
-				3EAC4FFD208E1E6E00600FAE /* MomentImagesView.m */,
+				3EAC4FFA208E1E6E00600FAE /* FabulousCommentView.h */,
+				3EAC4FFF208E1E6E00600FAE /* FabulousCommentView.m */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -915,7 +908,6 @@
 		EA400053208DDF65000A9607 /* WechatMoments */ = {
 			isa = PBXGroup;
 			children = (
-				3EAC4FBA208E1D9400600FAE /* Custom */,
 				3EAC4EE9208E1CE100600FAE /* Images */,
 				3EAC4EE5208E1CC700600FAE /* Resource */,
 				3EAC4EDA208E1CA700600FAE /* Common */,

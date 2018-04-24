@@ -35,6 +35,18 @@
 #define LMY_NavHeight (iPhoneX ? 88.f : 64.f)
 
 
+//屏幕当前模式
+#define UIDeviceOrientationDuration [[UIDevice currentDevice]orientation]
+
+//是否横屏
+#define UIDeviceOrientationIsLandscape ((UIDeviceOrientationDuration) == UIDeviceOrientationLandscapeLeft || (UIDeviceOrientationDuration) == UIDeviceOrientationLandscapeRight)
+
+
+
+
+
+
+
 #define CachesDirectoryPath  [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject]
 
 

@@ -50,7 +50,7 @@
         highlightedView.hidden          = YES;
         [self.contentView addSubview:highlightedView];
         self.highlightedView = highlightedView;
-        [highlightedView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [highlightedView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
         }];
         
@@ -59,7 +59,7 @@
         titleLabel.adjustsFontSizeToFitWidth = YES;
         [self.contentView addSubview:titleLabel];
         self.titleLabel = titleLabel;
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(0, 10.0f, 0, 10.0f));
         }];
         
@@ -69,7 +69,7 @@
         lineView.clipsToBounds = YES;
         [self.contentView addSubview:lineView];
         self.lineView = lineView;
-        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self.contentView);
             make.height.equalTo(@0.5f);
         }];

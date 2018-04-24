@@ -40,6 +40,7 @@
 {
     if (!_tipLabel) {
         UILabel * tipLabel = [[UILabel alloc] init];
+        [tipLabel setBackgroundColor:[UIColor clearColor]];
         [tipLabel setFont:[UIFont systemFontOfSize:14]];
         [tipLabel setTextColor:[UIColor lightGrayColor]];
         [self addSubview:_tipLabel = tipLabel];
@@ -114,12 +115,19 @@
         [self.tipLabel setHidden:YES];
         [self.loadingView setHidden:YES];
     }
-    
     [self.tipLabel sizeToFit];
-    [self.tipLabel setCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height/2)];
-    [self.loadingView setFrame:CGRectMake(self.tipLabel.frame.origin.x - self.loadingView.frame.size.width - 10,0, self.loadingView.frame.size.width, self.loadingView.frame.size.height)];
-    CGPoint center = self.loadingView.center;
-    center.y = self.tipLabel.center.y;
-    self.loadingView.center = center;
+}
+
+- (void)layoutSubviews
+{
+    [self.tipLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.mas_centerX);
+        make.centerY.mas_equalTo(self.mas_centerY);
+    }];
+
+    [self.loadingView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.tipLabel.mas_left).mas_offset(-10);
+        make.centerY.mas_equalTo(self.tipLabel.mas_centerY);
+    }];
 }
 @end

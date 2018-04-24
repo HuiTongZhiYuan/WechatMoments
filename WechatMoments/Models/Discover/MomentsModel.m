@@ -22,7 +22,10 @@
         self.sender_username = @"";
         
         self.content = @"";
-        
+
+        self.landscapeHeight = 0;
+        self.portraitHeight = 0;
+
         self.images = nil;
         self.comments = [[NSMutableArray alloc] init];
     }
@@ -59,7 +62,6 @@
                     if (comments) {
                         [CommentModel formatArray:comments addArray:tModel.comments];
                     }
-                    tModel.height = [MomentsPostView heightWithModel:tModel];
                     
                     [mArray addObject:tModel];
                 }

@@ -31,7 +31,7 @@
     [loginButton addTarget:self action:@selector(loginButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginButton];
     
-    [loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [loginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_left).mas_offset(16);
         make.right.mas_equalTo(self.view.mas_right).mas_offset(-16);
         make.height.mas_equalTo(49);

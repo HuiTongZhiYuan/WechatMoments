@@ -15,10 +15,16 @@
     
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         
-        UIView * lineLabel = [[UIView alloc] initWithFrame:CGRectMake(0, 15.5, SCREEN_WIDTH, 0.5)];
+        UIView * lineLabel = [[UIView alloc] init];
         [lineLabel setBackgroundColor:Color_Line_Background];
         [self addSubview:lineLabel];
-        
+
+        [lineLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(15.5);
+            make.width.mas_equalTo(self.mas_width);
+            make.height.mas_equalTo(0.5);
+        }];
     }
     return self;
 }

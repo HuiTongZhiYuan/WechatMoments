@@ -299,7 +299,7 @@ static CGFloat const LCCancelButtonTopMargin = 10.0f;
     
 
     [self addSubview:bottomView];
-    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
         
         CGFloat height =
@@ -322,7 +322,7 @@ static CGFloat const LCCancelButtonTopMargin = 10.0f;
 #endif
     
     [self addSubview:darkView];
-    [darkView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [darkView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
         make.top.equalTo(self).priorityLow();
         make.bottom.equalTo(bottomView.mas_top);
@@ -336,7 +336,7 @@ static CGFloat const LCCancelButtonTopMargin = 10.0f;
     UIView *whiteBgView         = [[UIView alloc] init];
     whiteBgView.backgroundColor = [UIColor whiteColor];
     [bottomView addSubview:whiteBgView];
-    [whiteBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [whiteBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(bottomView);
     }];
     self.whiteBgView = whiteBgView;
@@ -354,7 +354,7 @@ static CGFloat const LCCancelButtonTopMargin = 10.0f;
     titleLabel.textColor     = self.titleColor;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [bottomView addSubview:titleLabel];
-    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bottomView).offset(self.title.length > 0 ? self.titleEdgeInsets.top : 0);
         make.left.equalTo(bottomView).offset(self.titleEdgeInsets.left);
         make.right.equalTo(bottomView).offset(-self.titleEdgeInsets.right);
@@ -369,7 +369,7 @@ static CGFloat const LCCancelButtonTopMargin = 10.0f;
     tableView.dataSource      = self;
     tableView.delegate        = self;
     [bottomView addSubview:tableView];
-    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bottomView);
         make.top.equalTo(titleLabel.mas_bottom).offset(self.title.length > 0 ? self.titleEdgeInsets.bottom : 0);
         
@@ -385,7 +385,7 @@ static CGFloat const LCCancelButtonTopMargin = 10.0f;
     lineView.contentMode   = UIViewContentModeBottom;
     lineView.clipsToBounds = YES;
     [bottomView addSubview:lineView];
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bottomView);
         make.bottom.equalTo(tableView.mas_top);
         make.height.equalTo(@0.5f);
@@ -399,7 +399,7 @@ static CGFloat const LCCancelButtonTopMargin = 10.0f;
     divisionView.alpha           = 0.3f;
     divisionView.backgroundColor = self.separatorColor;
     [bottomView addSubview:divisionView];
-    [divisionView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [divisionView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bottomView);
         make.top.equalTo(tableView.mas_bottom);
         
@@ -425,7 +425,7 @@ static CGFloat const LCCancelButtonTopMargin = 10.0f;
                      action:@selector(cancelButtonClicked)
            forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:cancelButton];
-    [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [cancelButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bottomView);
         make.bottom.equalTo(bottomView);
         
@@ -507,7 +507,7 @@ static CGFloat const LCCancelButtonTopMargin = 10.0f;
         UIBlurEffect *blurEffect           = [UIBlurEffect effectWithStyle:self.blurEffectStyle];
         UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         [self.bottomView addSubview:blurEffectView];
-        [blurEffectView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [blurEffectView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.bottomView);
         }];
         self.blurEffectView = blurEffectView;
@@ -757,7 +757,7 @@ static CGFloat const LCCancelButtonTopMargin = 10.0f;
     self.window = window;
     
     [viewController.view addSubview:self];
-    [self mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(viewController.view);
     }];
     
