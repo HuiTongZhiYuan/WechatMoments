@@ -9,7 +9,9 @@
 #import "UIImageView+FLCommon.h"
 #import "NSString+md5.h"
 #import "FLWeakObject.h"
-#import <SDWebImageManager.h>
+#import <AFNetworking/AFNetworking.h>
+
+
 
 static NSMutableDictionary * sa_image_chache;
 @implementation UIImageView (FLCommon)
@@ -23,7 +25,7 @@ static NSMutableDictionary * sa_image_chache;
 {
     NSArray *paths =NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES);
     NSString *path = [paths objectAtIndex:0];
-    path = [path stringByAppendingString:@"/sa_images_dir/"];
+    path = [path stringByAppendingString:@"/lmy_images_dir/"];
     return path;
 }
 
@@ -68,18 +70,18 @@ static NSMutableDictionary * sa_image_chache;
         return;
     }
     [self setImage:placeHolder];
-    
+
     [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:url] options:SDWebImageAllowInvalidSSLCertificates progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-        
+
     } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-        
+
         if(finished && image)
         {
             [UIImageView fl_saveImage:url image:image];
             [self setImage:image];
             [UIImageView saveImageToCache:md5 image:image];
         }
-           
+
     }];
 }
 - (void)fl_setImage:(NSString*)url placeHolder:(UIImage*)placeHolder scale:(int)scale

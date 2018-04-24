@@ -194,7 +194,7 @@
 //    model.timeStamp = 1523596257;
 
     [self.avatarImageView setHidden:NO];
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:model.sender_avatar] placeholderImage:[LMYResource imageNamed:@"DefaultHead"]];
+    [self.avatarImageView fl_setImage:model.sender_avatar placeHolder:[LMYResource imageNamed:@"DefaultHead"]];
 
     //名字
     [self.nameLabel setHidden:NO];

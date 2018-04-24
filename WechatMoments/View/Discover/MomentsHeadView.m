@@ -30,7 +30,8 @@
     //背景视图
     heardImageView = [[UIImageView alloc] init];
     [heardImageView setBackgroundColor:[UIColor clearColor]];
-    [heardImageView sd_setImageWithURL:[NSURL URLWithString:[LMYUserLoginModel shareInstance].profile] placeholderImage:[LMYResource imageNamed:@"testBack"]];
+
+    [heardImageView fl_setImage:[LMYUserLoginModel shareInstance].profile placeHolder:[LMYResource imageNamed:@"testBack"]];
     [self addSubview:heardImageView];
     [heardImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_left);
@@ -62,7 +63,8 @@
         make.top.mas_equalTo(backView.mas_top).mas_offset(-2);
         make.bottom.mas_equalTo(backView.mas_bottom).mas_offset(-2);
     }];
-    [personImageView sd_setImageWithURL:[NSURL URLWithString:@"http://info.thoughtworks.com/rs/thoughtworks2/images/glyph_badge.png"] placeholderImage:[LMYResource imageNamed:@"DefaultHead"]];
+
+    [personImageView fl_setImage:[LMYUserLoginModel shareInstance].avatar placeHolder:[LMYResource imageNamed:@"DefaultHead"]];
     
     
     //用户名

@@ -8,6 +8,9 @@
 
 #import <XCTest/XCTest.h>
 #import "ContactsModel.h"
+#import "LMYInterface.h"
+#import "Foundation+FLKit.h"
+
 
 @interface WechatMomentsTests : XCTestCase
 
@@ -59,5 +62,78 @@
     }];
 }
 
+- (void)testUserJsmithNetworkRequest
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"获取个人信息 测试"];
+    NSLog(@"执行顺序：1");
 
+    [[LMYInterface sharedInstance] user_jsmith_success:^(id result) {
+
+        if ([result isKindOfClass: [NSDictionary class]])
+        {
+            [expectation fulfill];///调用fulfill后 waitForExpectationsWithTimeout 会结束等待
+
+            XCTAssertNotNil(result, @"json 对象不为空");///result结果为nil，会停在这里
+
+            XCTAssertNotNil([result objectForKey:@"avatar"], @"头像不为空");///result结果为nil，会停在这里
+
+            XCTAssertNotNil([result objectForKey:@"nick"], @"nick不为空");///nick结果为nil，会停在这里
+
+            XCTAssertNotNil([result objectForKey:@"profile-image"], @"profile-image不为空");///profile-image结果为nil，会停在这里
+
+            XCTAssertNotNil([result objectForKey:@"username"], @"username不为空");///username结果为nil，会停在这里
+
+            XCTAssertNotNil([result objectForKey:@"id"], @"id不为空");///id结果为nil，会停在这里
+        }
+        NSLog(@"执行顺序：2");
+    } failure:^(NSError *error) {
+        NSLog(@"执行顺序：3");
+    }];
+
+    ///设置的是30秒超时
+    [self waitForExpectationsWithTimeout:30.f handler:^(NSError * _Nullable error) {
+        NSLog(@"执行顺序：4");
+    }];
+}
+
+- (void)testTweetsNetworkRequest
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"获取朋友圈 测试"];
+    NSLog(@"执行顺序：1");
+
+    [[LMYInterface sharedInstance] user_jsmith_tweets_success:^(id result) {
+
+        if ([result isKindOfClass: [NSDictionary class]])
+        {
+            [expectation fulfill];///调用fulfill后 waitForExpectationsWithTimeout 会结束等待
+
+            NSArray * array = (NSArray *)result;
+            XCTAssertNotNil(array, @"json 对象不为空");///result结果为nil，会停在这里
+
+            if (array && [array isKindOfClass:[NSArray class]] && array.count > 0)
+            {
+                for (int i =0; i<array.count; i++) {
+                    NSDictionary * dic = FLDictionary([array objectAtIndex:i], nil);
+
+                    XCTAssertNotNil(dic, @"朋友圈消息不为空");///result结果为nil，会停在这里
+
+
+                    XCTAssertNotNil([dic objectForKey:@"sender"], @"发送者不为空");///sender结果为nil，会停在这里
+
+
+                    XCTAssertNotNil([dic objectForKey:@"content"], @"内容不为空");///content结果为nil，会停在这里
+                    XCTAssertNotNil([dic objectForKey:@"images"], @"有图片");///images结果为nil，会停在这里
+                }
+            }
+        }
+        NSLog(@"执行顺序：2");
+    } failure:^(NSError *error) {
+        NSLog(@"执行顺序：3");
+    }];
+
+    ///设置的是30秒超时
+    [self waitForExpectationsWithTimeout:30.f handler:^(NSError * _Nullable error) {
+        NSLog(@"执行顺序：4");
+    }];
+}
 @end

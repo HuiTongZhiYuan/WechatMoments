@@ -279,7 +279,7 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
     [_topBackView setHidden:YES];
     [self.view addSubview:_topBackView];
     
-    _momentsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
+    _momentsTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     _momentsTableView.separatorStyle= UITableViewCellSeparatorStyleNone;
     [_momentsTableView setDelegate:self];
     [_momentsTableView setDataSource:self];

@@ -66,7 +66,7 @@
     self.markButton.tag = tag;
     
     UIImage * triangle = [LMYResource imageNamed:@"background_gray"];
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:triangle];
+    [self.imageView fl_setImage:urlStr placeHolder:triangle];
 }
 
 

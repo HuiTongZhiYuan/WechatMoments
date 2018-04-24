@@ -41,7 +41,7 @@
               @[@{@"title":[LMYResource LMY_Localized:@"MiniPrograms"],@"image":[LMYResource imageNamed:@"Action_ReadOriginal"]}], nil];
     
     
-    _discoverTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
+    _discoverTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [_discoverTableView setDelegate:self];
     [_discoverTableView setDataSource:self];
     [self.view addSubview:_discoverTableView];

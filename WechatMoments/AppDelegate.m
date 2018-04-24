@@ -50,7 +50,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-   
+
+    [UIImageView configuration];
+    
      [NSThread sleepForTimeInterval:0.5];//设置启动页面时间
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -138,11 +140,11 @@
     self.mainTabBarController = tabCtl;
     
 
-//    LMYNavigationController * navAll = [[LMYNavigationController alloc] initWithRootViewController:self.mainTabBarController];
-//    self.window.rootViewController = navAll;
-    
-        MomentsViewController * mCtl = [[MomentsViewController alloc] init];
-         self.window.rootViewController = mCtl;
+    LMYNavigationController * navAll = [[LMYNavigationController alloc] initWithRootViewController:self.mainTabBarController];
+    self.window.rootViewController = navAll;
+
+//        MomentsViewController * mCtl = [[MomentsViewController alloc] init];
+//         self.window.rootViewController = mCtl;
 
     [self.window makeKeyAndVisible];
     

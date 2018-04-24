@@ -1437,6 +1437,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D62JN5VRKW;
 				INFOPLIST_FILE = WechatMomentsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1455,6 +1456,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D62JN5VRKW;
 				INFOPLIST_FILE = WechatMomentsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1471,7 +1473,9 @@
 		EA400084208DDF66000A9607 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D62JN5VRKW;
 				INFOPLIST_FILE = WechatMomentsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1480,6 +1484,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.HuiTongZhiYuan.WechatMomentsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = WechatMoments;
 			};
@@ -1488,7 +1494,9 @@
 		EA400085208DDF66000A9607 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D62JN5VRKW;
 				INFOPLIST_FILE = WechatMomentsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1497,6 +1505,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.HuiTongZhiYuan.WechatMomentsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = WechatMoments;
 			};

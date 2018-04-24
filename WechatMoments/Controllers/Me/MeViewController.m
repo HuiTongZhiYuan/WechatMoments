@@ -33,7 +33,7 @@
               @[@{@"title":[LMYResource LMY_Localized:@"Settings"],@"image":[LMYResource imageNamed:@"MoreSetting"]}], nil];
     
     
-    _infoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
+    _infoTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [_infoTableView setDelegate:self];
     [_infoTableView setDataSource:self];
     [self.view addSubview:_infoTableView];
@@ -174,8 +174,8 @@
         if (codeLabel==nil) {
             codeLabel = [cell viewWithTag:14];
         }
-        
-        [headImageView sd_setImageWithURL:[NSURL URLWithString:[LMYUserLoginModel shareInstance].avatar] placeholderImage:[LMYResource imageNamed:@"DefaultHead"]];
+
+        [headImageView fl_setImage:[LMYUserLoginModel shareInstance].avatar placeHolder:[LMYResource imageNamed:@"DefaultHead"]];
         nameLabel.text = [LMYUserLoginModel shareInstance].nick;
         codeLabel.text = @"wx_123456";
         

@@ -20,7 +20,7 @@
 
 #import "Foundation+FLKit.h"
 #import "UIView+FLKit.h"
-
+#import "UIImageView+FLCommon.h"
 
 
 #import "LMYThemeConfigModel.h"
