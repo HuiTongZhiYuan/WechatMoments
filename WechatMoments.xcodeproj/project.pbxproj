@@ -147,6 +147,7 @@
 		3EAC5024208E24C800600FAE /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAC501C208E24C700600FAE /* MeViewController.m */; };
 		3EAC5025208E24C800600FAE /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAC501F208E24C700600FAE /* ContactsViewController.m */; };
 		3EAC5026208E24C800600FAE /* WeChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAC5021208E24C800600FAE /* WeChatViewController.m */; };
+		EA00AFB0208F07E10040DC71 /* MomentImagesCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA00AFAF208F07E10040DC71 /* MomentImagesCollectionCell.m */; };
 		EA400056208DDF65000A9607 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA400055208DDF65000A9607 /* AppDelegate.m */; };
 		EA40005E208DDF66000A9607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA40005D208DDF66000A9607 /* Assets.xcassets */; };
 		EA400064208DDF66000A9607 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA400063208DDF66000A9607 /* main.m */; };
@@ -373,6 +374,8 @@
 		3EAC5022208E24C800600FAE /* WeChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatViewController.h; sourceTree = "<group>"; };
 		4181A9C32A70438F62C5870D /* Pods-WechatMoments.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WechatMoments.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WechatMoments/Pods-WechatMoments.debug.xcconfig"; sourceTree = "<group>"; };
 		62A45323D5579E287071B45F /* libPods-WechatMoments.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WechatMoments.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA00AFAE208F07E10040DC71 /* MomentImagesCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentImagesCollectionCell.h; sourceTree = "<group>"; };
+		EA00AFAF208F07E10040DC71 /* MomentImagesCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentImagesCollectionCell.m; sourceTree = "<group>"; };
 		EA400051208DDF65000A9607 /* WechatMoments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WechatMoments.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA400054208DDF65000A9607 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EA400055208DDF65000A9607 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -827,6 +830,8 @@
 				3EAC4FF8208E1E6E00600FAE /* MomentsPostView.m */,
 				3EAC5003208E1E6E00600FAE /* MomentImagesView.h */,
 				3EAC4FFD208E1E6E00600FAE /* MomentImagesView.m */,
+				EA00AFAE208F07E10040DC71 /* MomentImagesCollectionCell.h */,
+				EA00AFAF208F07E10040DC71 /* MomentImagesCollectionCell.m */,
 				3EAC5000208E1E6E00600FAE /* MometsCommentCell.h */,
 				3EAC4FF9208E1E6E00600FAE /* MometsCommentCell.m */,
 				3EAC4FFB208E1E6E00600FAE /* MomentsHeadView.h */,
@@ -1230,6 +1235,7 @@
 				3EAC4EE8208E1CD000600FAE /* LMYResource.m in Sources */,
 				3EAC4FDE208E1E0000600FAE /* FLPictureViewerController.m in Sources */,
 				3EAC4EE3208E1CB300600FAE /* LMYCommon.m in Sources */,
+				EA00AFB0208F07E10040DC71 /* MomentImagesCollectionCell.m in Sources */,
 				3EAC500E208E1E6E00600FAE /* FabulousCommentView.m in Sources */,
 				3EAC4ECF208E1C2E00600FAE /* MBProgressHUD+SAToast.m in Sources */,
 				3EAC4ED1208E1C2E00600FAE /* UIImage+FLCommon.m in Sources */,

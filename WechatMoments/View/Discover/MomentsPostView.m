@@ -217,23 +217,27 @@
             topY = self.contentLabel.l_bottom;
         }
         CGFloat contentH = 10; //图片区域高度
-        CGFloat one = (NAME_IMAGES_WIDTH - 8)/3;
+//        CGFloat one = (NAME_IMAGES_WIDTH - 8)/3;
 
-        CGFloat contentW = one*3+8;//图片区域宽度
+        CGFloat contentW = NAME_IMAGES_WIDTH;//图片区域宽度
         if (self.cellModel.images.count == 4)
         {
-            contentW = one*2+4;//图片区域宽度
+            contentW = ONE_IMAGES_WIDTH*2+4;//图片区域宽度
+            contentH = ONE_IMAGES_WIDTH*2+4;
         }
-        if (self.cellModel.images.count > 0) {
-            if (self.cellModel.images.count > 1 && self.cellModel.images.count <=3)
-            {
-                contentH = one;
-            }else if (self.cellModel.images.count > 3 && self.cellModel.images.count <=6){
-                contentH = one*2+4;
-            }else if (self.cellModel.images.count > 6){
-                contentH = one*3+8;
-            }else{
-                contentH = one*2+4;
+        else
+        {
+            if (self.cellModel.images.count > 0) {
+                if (self.cellModel.images.count > 1 && self.cellModel.images.count <=3)
+                {
+                    contentH = ONE_IMAGES_WIDTH;
+                }else if (self.cellModel.images.count > 3 && self.cellModel.images.count <=6){
+                    contentH = ONE_IMAGES_WIDTH*2+4;
+                }else if (self.cellModel.images.count > 6){
+                    contentH = ONE_IMAGES_WIDTH*3+8;
+                }else{
+                    contentH = ONE_IMAGES_WIDTH*2+4;
+                }
             }
         }
         [self.imagesView mas_remakeConstraints:^(MASConstraintMaker *make) {

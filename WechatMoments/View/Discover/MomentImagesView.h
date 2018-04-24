@@ -10,10 +10,6 @@
 
 
 
-#define NAME_IMAGES_WIDTH SCREEN_WIDTH-(72-12)*2  //图片区域 宽度
-
-#define ONE_IMAGES_WIDTH (NAME_IMAGES_WIDTH - 8)/3 //一张图片宽度
-
 @interface MomentImagesView : UIView
 
 - (void)showMomentImagesView:(NSArray *)images;

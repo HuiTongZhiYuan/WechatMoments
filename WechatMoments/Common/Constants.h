@@ -116,3 +116,9 @@
 #define MH_MAIN_LINE_COLOR_1 HEX(0xD9D8D9)
 
 
+//朋友圈九宫格图片
+#define NAME_IMAGES_WIDTH SCREEN_WIDTH-(72.0+20.0)  //图片区域 宽度
+
+#define ONE_IMAGES_WIDTH (NAME_IMAGES_WIDTH - 8.0)/3.0 //一张图片宽度
+
+

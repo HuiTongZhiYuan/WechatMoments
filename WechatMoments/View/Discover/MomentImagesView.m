@@ -7,213 +7,132 @@
 //
 
 #import "MomentImagesView.h"
-#import "LMYImageButton.h"
 #import "FLPictureViewerController.h"
 #import "AppDelegate.h"
 #import "UIViewController+MJPopupViewController.h"
+#import "MomentImagesCollectionCell.h"
 
+@interface MomentImagesView ()<FLPictureViewerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,MomentImagesCollectionCellDelegate>
 
-@interface MomentImagesView ()<LMYImageButtonDelegate,FLPictureViewerControllerDelegate>
-
-@property(nonatomic,strong)LMYImageButton * imageButton1;
-@property(nonatomic,strong)LMYImageButton * imageButton2;
-@property(nonatomic,strong)LMYImageButton * imageButton3;
-@property(nonatomic,strong)LMYImageButton * imageButton4;
-@property(nonatomic,strong)LMYImageButton * imageButton5;
-@property(nonatomic,strong)LMYImageButton * imageButton6;
-@property(nonatomic,strong)LMYImageButton * imageButton7;
-@property(nonatomic,strong)LMYImageButton * imageButton8;
-@property(nonatomic,strong)LMYImageButton * imageButton9;
-
+@property(nonatomic,strong)UICollectionView * collectionView;
 
 @property(nonatomic,strong)NSArray * imageNSArray;
 
 @end
 
 
+static NSString *const cellId = @"FLPictureViewerCellId";
+
+
 @implementation MomentImagesView
-
-
-//- (LMYImageButton *)imageButton1
-//{
-//    if (!_imageButton1) {
-//        LMYImageButton * imageButton1 = [[LMYImageButton alloc] initWithFrame:CGRectMake(0, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH)];
-//        imageButton1.delegate = self;
-//        [self addSubview:_imageButton1 = imageButton1];
-//    }
-//    return _imageButton1;
-//}
-//
-//- (LMYImageButton *)imageButton2
-//{
-//    if (!_imageButton2) {
-//        LMYImageButton * imageButton2 = [[LMYImageButton alloc] initWithFrame:CGRectMake(0, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH)];
-//        imageButton2.delegate = self;
-//        [self addSubview:_imageButton2 = imageButton2];
-//    }
-//    return _imageButton2;
-//}
-//
-//- (LMYImageButton *)imageButton3
-//{
-//    if (!_imageButton3) {
-//        LMYImageButton * imageButton3 = [[LMYImageButton alloc] initWithFrame:CGRectMake(0, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH)];
-//        imageButton3.delegate = self;
-//        [self addSubview:_imageButton3 = imageButton3];
-//    }
-//    return _imageButton3;
-//}
-//
-//- (LMYImageButton *)imageButton4
-//{
-//    if (!_imageButton4) {
-//        LMYImageButton * imageButton4 = [[LMYImageButton alloc] initWithFrame:CGRectMake(0, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH)];
-//        imageButton4.delegate = self;
-//        [self addSubview:_imageButton4 = imageButton4];
-//    }
-//    return _imageButton4;
-//}
-//
-//- (LMYImageButton *)imageButton5
-//{
-//    if (!_imageButton5) {
-//        LMYImageButton * imageButton5 = [[LMYImageButton alloc] initWithFrame:CGRectMake(0, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH)];
-//        imageButton5.delegate = self;
-//        [self addSubview:_imageButton5 = imageButton5];
-//    }
-//    return _imageButton5;
-//}
-//
-//- (LMYImageButton *)imageButton6
-//{
-//    if (!_imageButton6) {
-//        LMYImageButton * imageButton6 = [[LMYImageButton alloc] initWithFrame:CGRectMake(0, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH)];
-//        imageButton6.delegate = self;
-//        [self addSubview:_imageButton6 = imageButton6];
-//    }
-//    return _imageButton6;
-//}
-//
-//- (LMYImageButton *)imageButton7
-//{
-//    if (!_imageButton7) {
-//        LMYImageButton * imageButton7 = [[LMYImageButton alloc] initWithFrame:CGRectMake(0, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH)];
-//        imageButton7.delegate = self;
-//        [self addSubview:_imageButton1 = imageButton7];
-//    }
-//    return _imageButton7;
-//}
-//
-//- (LMYImageButton *)imageButton8
-//{
-//    if (!_imageButton8) {
-//        LMYImageButton * imageButton8 = [[LMYImageButton alloc] initWithFrame:CGRectMake(0, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH)];
-//        imageButton8.delegate = self;
-//        [self addSubview:_imageButton1 = imageButton8];
-//    }
-//    return _imageButton8;
-//}
-//
-//- (LMYImageButton *)imageButton9
-//{
-//    if (!_imageButton9) {
-//        LMYImageButton * imageButton9 = [[LMYImageButton alloc] initWithFrame:CGRectMake(0, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH)];
-//        imageButton9.delegate = self;
-//        [self addSubview:_imageButton1 = imageButton9];
-//    }
-//    return _imageButton9;
-//}
-
 
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     
-    [self setBackgroundColor:[UIColor redColor]];
+    [self setBackgroundColor:[UIColor clearColor]];
+
+    UICollectionViewFlowLayout * layOut = [[UICollectionViewFlowLayout alloc]init];
+    layOut.scrollDirection = UICollectionViewScrollDirectionVertical; //设置布局方式
+
+
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layOut];
+    [_collectionView setBackgroundColor:[UIColor clearColor]];
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    _collectionView.scrollEnabled = NO;
+    [self addSubview:_collectionView];
+
+    [_collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(0);
+        make.height.mas_equalTo(self.mas_height);
+    }];
+    // 注册cell
+    [self.collectionView registerClass:[MomentImagesCollectionCell class] forCellWithReuseIdentifier:cellId];
 
     return self;
 }
 
 - (void)showMomentImagesView:(NSArray *)images
 {
-//    self.imageNSArray = images;
-//    for (UIView * vi in self.subviews) {
-//        [vi setHidden:YES];
-//    }
-//    
-//    //重新布局
-//    if (images.count > 0) {
-//        [self.imageButton1 setHidden:NO];
-//        [self.imageButton1 setImageWithUrl:FLString([[images objectAtIndex:0] objectForKey:@"url"], @"") tag:0];
-//        if (images.count == 1) {
-//            self.imageButton1.frame = CGRectMake(0, 0, ONE_IMAGES_WIDTH*2+4, ONE_IMAGES_WIDTH*2+4);
-//        }else{
-//            self.imageButton1.frame = CGRectMake(0, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        }
-//        [self.imageButton1 sizeChangeed];
-//    }
-//    if (images.count > 1) {
-//        [self.imageButton2 setHidden:NO];
-//        [self.imageButton2 setImageWithUrl:FLString([[images objectAtIndex:1] objectForKey:@"url"], @"") tag:1];
-//        self.imageButton2.frame = CGRectMake(ONE_IMAGES_WIDTH+4, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        [self.imageButton2 sizeChangeed];
-//    }
-//    if (images.count > 2) {
-//        [self.imageButton3 setHidden:NO];
-//        [self.imageButton3 setImageWithUrl:FLString([[images objectAtIndex:2] objectForKey:@"url"], @"") tag:2];
-//        if (images.count == 4) {
-//            self.imageButton3.frame = CGRectMake(0, (ONE_IMAGES_WIDTH+4), ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        }else{
-//            self.imageButton3.frame = CGRectMake((ONE_IMAGES_WIDTH+4)*2, 0, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        }
-//        [self.imageButton3 sizeChangeed];
-//    }
-//    if (images.count > 3) {
-//        
-//        [self.imageButton4 setHidden:NO];
-//        [self.imageButton4 setImageWithUrl:FLString([[images objectAtIndex:3] objectForKey:@"url"], @"") tag:3];
-//        if (images.count == 4) {
-//            self.imageButton4.frame = CGRectMake((ONE_IMAGES_WIDTH+4), (ONE_IMAGES_WIDTH+4), ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        }else{
-//            self.imageButton4.frame = CGRectMake(0, (ONE_IMAGES_WIDTH+4), ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        }
-//        [self.imageButton4 sizeChangeed];
-//    }
-//    if (images.count > 4) {
-//        [self.imageButton5 setHidden:NO];
-//        [self.imageButton5 setImageWithUrl:FLString([[images objectAtIndex:4] objectForKey:@"url"], @"") tag:4];
-//        self.imageButton5.frame = CGRectMake((ONE_IMAGES_WIDTH+4), (ONE_IMAGES_WIDTH+4), ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        [self.imageButton5 sizeChangeed];
-//    }
-//    if (images.count > 5) {
-//        [self.imageButton6 setHidden:NO];
-//        [self.imageButton6 setImageWithUrl:FLString([[images objectAtIndex:5] objectForKey:@"url"], @"") tag:5];
-//        self.imageButton6.frame = CGRectMake((ONE_IMAGES_WIDTH+4)*2, (ONE_IMAGES_WIDTH+4), ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        [self.imageButton6 sizeChangeed];
-//    }
-//    if (images.count > 6) {
-//        [self.imageButton7 setHidden:NO];
-//        [self.imageButton7 setImageWithUrl:FLString([[images objectAtIndex:6] objectForKey:@"url"], @"") tag:6];
-//        self.imageButton7.frame = CGRectMake(0, (ONE_IMAGES_WIDTH+4)*2, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        
-//        [self.imageButton7 sizeChangeed];
-//    }
-//    if (images.count > 7) {
-//        [self.imageButton8 setHidden:NO];
-//        [self.imageButton8 setImageWithUrl:FLString([[images objectAtIndex:7] objectForKey:@"url"], @"") tag:7];
-//        self.imageButton8.frame = CGRectMake((ONE_IMAGES_WIDTH+4), (ONE_IMAGES_WIDTH+4)*2, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        [self.imageButton8 sizeChangeed];
-//    }
-//    if (images.count > 8) {
-//        [self.imageButton9 setHidden:NO];
-//        [self.imageButton9 setImageWithUrl:FLString([[images objectAtIndex:8] objectForKey:@"url"], @"") tag:8];
-//        self.imageButton9.frame = CGRectMake((ONE_IMAGES_WIDTH+4)*2, (ONE_IMAGES_WIDTH+4)*2, ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
-//        [self.imageButton9 sizeChangeed];
-//    }
+    self.imageNSArray = images;
+
+    if (self.imageNSArray.count == 1) {
+
+        [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(ONE_IMAGES_WIDTH*2+4);
+        }];
+    }else{
+        [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(self.mas_width);
+        }];
+    }
+
+    [self.collectionView reloadData];
 }
 
-#pragma - LMYImageButtonDelegate <NSObject>
+//实现代理协议
+// MARK: - Navigation
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.imageNSArray.count;
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 先要注册
+    MomentImagesCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    cell.delegate = self;
+    if (indexPath.row<self.imageNSArray.count) {
+
+        NSString * urlString = FLString([[self.imageNSArray objectAtIndex:indexPath.row] objectForKey:@"url"], @"");
+        [cell showMomentImagesCollectionCell:urlString indexPath:indexPath];
+    }
+    return cell;
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.imageNSArray.count == 4) {
+        NSLog(@"-=-=-=-=>>>>>>>>>> %f",self.l_width);
+        NSLog(@"-=-=-=-=>>>>>>>>>> %f",self.l_height);
+        NSLog(@"-=-=-=-=>>>>>>>>>> %f",ONE_IMAGES_WIDTH);
+    }
+    if (self.imageNSArray.count == 1) {
+        return CGSizeMake(ONE_IMAGES_WIDTH*2+4, ONE_IMAGES_WIDTH*2+4);
+    }
+    return CGSizeMake(ONE_IMAGES_WIDTH, ONE_IMAGES_WIDTH);
+    
+}
+
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, 0, 0, 0); //设置距离上 左 下 右
+}
+
+//这个是两行cell之间的间距（上下行cell的间距）
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 4;
+}
+
+//两个cell之间的间距（同一行的cell的间距）
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 4;
+}
+
+
+
+#pragma mark - MomentImagesCollectionCellDelegate <NSObject>
 - (void)imageButtonClick:(NSInteger)index
 {
     FLPictureViewerController * next = [[FLPictureViewerController alloc] init];

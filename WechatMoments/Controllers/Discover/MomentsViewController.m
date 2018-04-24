@@ -294,7 +294,6 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    
 
     [_topBackView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_left);
@@ -319,6 +318,8 @@ static NSString * FooterViewIdentifier = @"MomentsFooterViewIdentifier";
     
     NSArray *array = [NSArray arrayWithObjects:contraint1, contraint2, contraint3, contraint4, nil];
     [self.view addConstraints:array];
+
+    [self.momentsTableView reloadData];
 }
 
 #pragma mark - 滚动代理

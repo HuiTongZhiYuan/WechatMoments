@@ -42,6 +42,21 @@
     [_markButton setBackgroundColor:[UIColor clearColor]];
     _markButton.alpha = 0.2;
     [self addSubview:_markButton];
+
+    [_imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(0);
+        make.width.mas_equalTo(self.mas_width);
+        make.height.mas_equalTo(self.mas_height);
+    }];
+
+
+    [_markButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(0);
+        make.width.mas_equalTo(self.mas_width);
+        make.height.mas_equalTo(self.mas_height);
+    }];
     
     return self;
 }
@@ -55,11 +70,11 @@
 }
 
 
-- (void)sizeChangeed
-{
-    self.imageView.frame = CGRectMake(0, 0, self.l_width, self.l_height);
-    self.markButton.frame = CGRectMake(0, 0, self.l_width, self.l_height);
-}
+//- (void)sizeChangeed
+//{
+//    self.imageView.frame = CGRectMake(0, 0, self.l_width, self.l_height);
+//    self.markButton.frame = CGRectMake(0, 0, self.l_width, self.l_height);
+//}
 
 - (void)markButtonClick:(UIButton *)sender
 {
